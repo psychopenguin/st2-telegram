@@ -1,5 +1,4 @@
 import telegram
-import json
 from st2reactor.sensor.base import PollingSensor
 
 class TelegramSensor(PollingSensor):
@@ -24,7 +23,7 @@ class TelegramSensor(PollingSensor):
 
         if updates:
             for u in updates:
-                self._dispatch_trigger(json.dumps(u))
+                self._dispatch_trigger(u.to_dict())
             self._last_id = updates[-1].update_id
 
     def update_trigger(self):
